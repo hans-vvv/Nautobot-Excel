@@ -49,8 +49,8 @@ for primary_field in nautobot_api_endpoints:
 wb = Workbook()
 for primary_field in nautobot_data:
     for secondary_field in nautobot_data[primary_field]:
-        wb.create_sheet(primary_field + "_" + secondary_field)
-        sheet = wb[primary_field + "_" + secondary_field]
+        wb.create_sheet(primary_field + "." + secondary_field)
+        sheet = wb[primary_field + "." + secondary_field]
         # print Column headers
         for index, key in enumerate(nautobot_data[primary_field][secondary_field][0].keys()):
             sheet[xlref(0, index)] = key

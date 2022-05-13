@@ -45,6 +45,6 @@ for sheetname in wb.sheetnames:
                 object_properties.update({columnname: cell})
         objects_properties.append(object_properties)
     # Dump objects in dB
-    first_field, second_field = sheetname.split("_")[0], sheetname.split("_")[1]
+    first_field, second_field = sheetname.split(".")[0], sheetname.split(".")[1]
     objects_type = getattr(getattr(nautobot, first_field), second_field)
     objects_type.create(objects_properties)
