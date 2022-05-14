@@ -54,16 +54,17 @@ for primary_field in nautobot_data:
         # print Column headers
         for index, key in enumerate(nautobot_data[primary_field][secondary_field][0].keys()):
             sheet[xlref(0, index)] = key
-        # print data
+        # print Data
         row_index = 1
         for object_ in nautobot_data[primary_field][secondary_field]:
             for col_index, val in enumerate(object_.values()):
-                if isinstance(val, list):
-                    sheet[xlref(row_index, col_index)] = ','.join(val)
-                elif isinstance(val, dict): # dirty "Workaround"
+                if not val:
                     sheet[xlref(row_index, col_index)] = ""
+                elif isinstance(val, list):
+                    val = [str(element) for element in val]
+                    sheet[xlref(row_index, col_index)] = ','.join(val)
                 else:
-                    sheet[xlref(row_index, col_index)] = val
+                    sheet[xlref(row_index, col_index)] = str(val)
             row_index += 1
 
 wb.save('Nautobot-tables.xlsx')
